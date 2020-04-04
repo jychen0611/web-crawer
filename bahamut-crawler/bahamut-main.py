@@ -42,19 +42,19 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def slot_btn_function(self):
         global state
-        state = title1
+        state = "title1"
         self.hide()
         self.s = SecondUi()
         self.s.show()
     def slot_btn_function_2(self):
         global state
-        state = title2
+        state = "title2"
         self.hide()
         self.s = SecondUi()
         self.s.show()
     def slot_btn_function_3(self):
         global state
-        state = title3
+        state = "title3"
         self.hide()
         self.s = SecondUi()
         self.s.show()
@@ -91,11 +91,7 @@ class MainWindow(QtWidgets.QMainWindow):
         brief = [e.text for e in briefElements]
         # print(brief)
 
-        # 找出所有target為"b-list__brief"的a elements
-        blankElements = soup.find_all('a', target="_blank")
-        # print(blankElements)
-        blank = [e.text for e in blankElements]
-        # print(blank)
+
 
         # 找出所有target為"b-list__brief"的a elements
         timeElements = soup.find_all('a', title="觀看最新回覆文章")
@@ -105,13 +101,19 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # print數量
         print('文章數量:', len(title), len(brief), len(time))
+        global title1, brief1, title2, brief2, title3, brief3
+        title1 = title[0]
+        brief1 = brief[0]
+        title2 = title[1]
+        brief2 = brief[1]
+        title3 = title[2]
+        brief3 = brief[2]
 
-        for ti, br, bl in zip(title, brief, time):
-            print(ti, br, bl)
 
-        bahamut_dict = {"title": title,
-                        "brief": brief,
-                        }
+
+        self.ui.pushButton.setText(title1)
+        self.ui.pushButton_2.setText(title2)
+        self.ui.pushButton_3.setText(title3)
 
 
 class SecondUi(QtWidgets.QMainWindow):
@@ -122,11 +124,11 @@ class SecondUi(QtWidgets.QMainWindow):
 
         self.ui.pushButton.setText("返回")
 
-        if state == title1:
+        if state == "title1":
             self.ui.label.setText(brief1)
-        elif state == title2:
+        elif state == "title2":
             self.ui.label.setText(brief2)
-        elif state == title3:
+        elif state == "title3":
             self.ui.label.setText(brief3)
 
 
