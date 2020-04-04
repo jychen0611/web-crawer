@@ -8,6 +8,10 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton
 from bahamutui import Ui_MainWindow
 from bahamutui2 import Ui2_MainWindow
+#from bahamutcrawler import Cralwer
+import requests
+# 載入BeautifulSoup套件, 若沒有的話可以先: pip install beautifulsoup4
+from bs4 import BeautifulSoup
 
 title1 = "title1"
 title2 = "title2"
@@ -28,11 +32,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.pushButton.setText(title1)
         self.ui.pushButton_2.setText(title2)
         self.ui.pushButton_3.setText(title3)
+        self.ui.pushButton_4.setText("重新整理")
 
 
         self.ui.pushButton.clicked.connect(self.slot_btn_function)
         self.ui.pushButton_2.clicked.connect(self.slot_btn_function_2)
         self.ui.pushButton_3.clicked.connect(self.slot_btn_function_3)
+        self.ui.pushButton_4.clicked.connect(self.reset)
 
     def slot_btn_function(self):
         global state
@@ -52,6 +58,60 @@ class MainWindow(QtWidgets.QMainWindow):
         self.hide()
         self.s = SecondUi()
         self.s.show()
+
+
+
+
+    def reset(self):
+        url = 'https://forum.gamer.com.tw/B.php?bsn=60076'
+        # 透過request套件抓下這個網址的資料
+        requ = requests.get(url)
+        # 初步檢視抓到的資料結構
+        web_content = requ.text
+        # print(web_content)
+
+        # 以 Beautiful Soup 解析 HTML 程式碼 :
+        soup = BeautifulSoup(web_content, 'lxml')
+
+        # 找出所有class為"b-list__main__title"的a elements
+        titleElements = soup.find_all('a', class_="b-list__main__title")
+        # print(titleElements)
+        title = [e.text for e in titleElements]
+        # print(title)
+
+        # 找出所有class為"b-list__main__title"的p elements
+        titleElements = soup.find_all('p', class_="b-list__main__title")
+        # print(titleElements)
+        title = [e.text for e in titleElements]
+        # print(title)
+
+        # 找出所有class為"b-list__brief"的p elements
+        briefElements = soup.find_all('p', class_="b-list__brief")
+        # print(briefElements)
+        brief = [e.text for e in briefElements]
+        # print(brief)
+
+        # 找出所有target為"b-list__brief"的a elements
+        blankElements = soup.find_all('a', target="_blank")
+        # print(blankElements)
+        blank = [e.text for e in blankElements]
+        # print(blank)
+
+        # 找出所有target為"b-list__brief"的a elements
+        timeElements = soup.find_all('a', title="觀看最新回覆文章")
+        # print(timeElements)
+        time = [e.text for e in timeElements]
+        # print(time)
+
+        # print數量
+        print('文章數量:', len(title), len(brief), len(time))
+
+        for ti, br, bl in zip(title, brief, time):
+            print(ti, br, bl)
+
+        bahamut_dict = {"title": title,
+                        "brief": brief,
+                        }
 
 
 class SecondUi(QtWidgets.QMainWindow):
