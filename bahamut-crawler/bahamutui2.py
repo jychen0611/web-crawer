@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'bahamut.ui'
+# Form implementation generated from reading ui file 'bahamutsecond.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.2
 #
@@ -10,29 +10,17 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
+class Ui2_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(10, 50, 781, 511))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.pushButton = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton.setGeometry(QtCore.QRect(20, 500, 93, 41))
         self.pushButton.setObjectName("pushButton")
-        self.verticalLayout.addWidget(self.pushButton)
-        self.pushButton_2 = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.verticalLayout.addWidget(self.pushButton_2)
-        self.pushButton_3 = QtWidgets.QPushButton(self.verticalLayoutWidget)
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.verticalLayout.addWidget(self.pushButton_3)
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(10, 9, 771, 41))
+        self.label.setGeometry(QtCore.QRect(10, 20, 781, 441))
         self.label.setObjectName("label")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -50,8 +38,6 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton.setText(_translate("MainWindow", "PushButton"))
-        self.pushButton_2.setText(_translate("MainWindow", "PushButton"))
-        self.pushButton_3.setText(_translate("MainWindow", "PushButton"))
         self.label.setText(_translate("MainWindow", "TextLabel"))
 
 
